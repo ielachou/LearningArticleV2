@@ -88,3 +88,11 @@ class PHCAgent:
     def updateAlpha (self):
         pass
         #self.alpha = 1 / (10 + 0.00001 * self.timeStep)
+
+    def observe(self, reward, obs, nextObs):
+        self.setReward(reward)
+        self.updateActionValues(obs, nextObs)
+        self.updateStrategy(obs)
+        self.updateTimeStep()
+        self.updateEpsilon()
+        self.updateAlpha()

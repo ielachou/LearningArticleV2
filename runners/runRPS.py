@@ -9,7 +9,7 @@ from environments.matrix_game import MatrixGame
 if __name__ == '__main__':
     nb_episode = 1000000
     evaluate_every = 10000
-    nb_runs = 1
+    nb_runs = 10
 
     actions = np.arange(3)
 
@@ -67,8 +67,8 @@ if __name__ == '__main__':
 
     #plt.ylim(0, 1)
     #plt.xlim(0, 1)
-    plt.xlabel("episode")
-    plt.ylabel("pi(0)")
+    plt.xlabel("Pr(Rock)")
+    plt.ylabel("Pr(Paper)")
     plt.legend()
     #plt.savefig("result.jpg")
     plt.show()

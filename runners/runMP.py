@@ -9,8 +9,8 @@ from environments.matrix_game import MatrixGame
 
 if __name__ == '__main__':
 
-    nb_episode = 100000
-    evaluate_every = 1000
+    nb_episode = 1000000
+    evaluate_every = 10000
     nb_runs = 1
     total_pi_historyHeads = np.zeros(int(nb_episode / evaluate_every))
     total_pi_historyHeads2 = np.zeros(int(nb_episode / evaluate_every))
@@ -21,10 +21,10 @@ if __name__ == '__main__':
         agent1 = WoLFAgent(alpha=0.1, actions=actions,nb_states=1, high_delta=0.0004, low_delta=0.0002)
         #agent2 = WoLFAgent(alpha=0.1, actions=actions,nb_states=1, high_delta=0.0004, low_delta=0.0002)
         #agent1 = PHCAgent(delta = 0.0004,initialStrategy=(1/len(actions) for i in range(len(actions))))
-        #agent2 = PHCAgent(delta = 0.0004,initialStrategy=(1/len(actions) for i in range(len(actions))))
+        agent2 = PHCAgent(delta = 0.0004,initialStrategy=(1/len(actions) for i in range(len(actions))))
 
         #agent1 = PHCAgent(delta = 0.0004,initialStrategy=(1.0, 0.0))
-        agent2 = PHCAgent(delta = 0.0004,initialStrategy=(1.0, 0.0))
+        #agent2 = PHCAgent(delta = 0.0004,initialStrategy=(1.0, 0.0))
 
         for episode in range(nb_episode):
             action1 = agent1.act(0)
@@ -39,13 +39,8 @@ if __name__ == '__main__':
             _, r1, r2 = game.step(action1, action2)
 
             agent1.observe(reward=r1, obs=0, nextobs=0)
-            #agent2.observe(reward=r2, obs=0, nextObs=0)
-            agent2.setReward(r2)
-            agent2.updateActionValues(0,0)
-            agent2.updateStrategy(0)
-            agent2.updateTimeStep()
-            agent2.updateEpsilon()
-            agent2.updateAlpha()
+            agent2.observe(reward=r2, obs=0, nextObs=0)
+
 
             if episode % evaluate_every == 0:
                 index = int(episode / evaluate_every)
@@ -78,8 +73,8 @@ if __name__ == '__main__':
     plt.plot(np.arange(0,len(total_pi_historyHeads2)*evaluate_every, evaluate_every),total_pi_historyHeads2, label="PHC: Pr(Heads)", linewidth=0.5)
 
     plt.ylim(0, 1)
-    plt.xlabel("episode")
-    plt.ylabel("pi(0)")
+    plt.xlabel("Iterations")
+    plt.ylabel("Pr(Heads)")
     plt.legend()
     plt.savefig("resultMP.jpg")
     plt.show()

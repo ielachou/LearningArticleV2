@@ -30,8 +30,8 @@ class WoLFAgent():
         return q_values
 
     def act(self, s, q_values=None):
-        #action_id = np.random.choice(np.arange(len(self.actions)), p=self.pi[s])
-        action_id = random.choices(np.arange(len(self.actions)), weights=self.pi[s])[0]
+        action_id = np.random.choice(np.arange(len(self.actions)), p=self.pi[s])
+        #action_id = random.choices(np.arange(len(self.actions)), weights=self.pi[s])[0]
         self.last_action_id = action_id
         action = self.actions[action_id]
         return action

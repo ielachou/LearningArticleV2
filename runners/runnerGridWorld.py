@@ -8,9 +8,9 @@ from environments.gridWorld import GridWorldEnv
 
 
 if __name__ == "__main__":
-    nb_episode = 10000
-    evaluate_every = 1000
-    nb_runs = 1
+    nb_episode = 100000
+    evaluate_every = 2000
+    nb_runs = 10
     probsNorth1 = []
     probsNorth2 = []
     probsWest2 = []
@@ -60,12 +60,12 @@ if __name__ == "__main__":
     print(probsNorth1)
     print(probsEast1)
 
-    plt.plot(probsNorth1, probsEast1, label="Training average")
+    plt.plot(probsNorth1, probsEast1, label="Player1 : Wolf-PHC")
 
-    plt.plot(probsNorth2,probsWest2, label="Training average")
+    plt.plot(probsNorth2,probsWest2, label="Player2 : PHC")
 
     plt.xlabel("Pr(North)")
-    plt.ylabel("Pr(West)")
+    plt.ylabel("Pr(East||West)")
     ax.set_xlim(0,1)
     ax.set_ylim(0,1)
     plt.show()
