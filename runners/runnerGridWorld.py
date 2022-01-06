@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from agents.wolf_agent import WoLFAgent
+from agents.Q_learner_agent import QLearnerAgent
 from environments.gridWorld import GridWorldEnv
 
 
