@@ -1,4 +1,4 @@
-#INFO-F409 : Learning dynamics
+# INFO-F409 : Learning dynamics
 ## Rational and convergent learning in stochastic games
 
 This github lists the files necessary for our simulations during the writing of our article.
