@@ -19,33 +19,27 @@ if __name__ == '__main__':
     for i in range(nb_runs):
         actions = np.arange(2)
         agent1 = WoLFAgent(alpha=0.1, actions=actions,nb_states=1, high_delta=0.0004, low_delta=0.0002)
-        #agent2 = WoLFAgent(alpha=0.1, actions=actions,nb_states=1, high_delta=0.0004, low_delta=0.0002)
+        agent2 = WoLFAgent(alpha=0.1, actions=actions,nb_states=1, high_delta=0.0004, low_delta=0.0002)
         #agent1 = PHCAgent(delta = 0.0004,initialStrategy=(1/len(actions) for i in range(len(actions))))
-        agent2 = PHCAgent(delta = 0.0004,initialStrategy=(1/len(actions) for i in range(len(actions))))
+        #agent2 = PHCAgent(delta = 0.0004,initialStrategy=(1/len(actions) for i in range(len(actions))))
 
         #agent1 = PHCAgent(delta = 0.0004,initialStrategy=(1.0, 0.0))
         #agent2 = PHCAgent(delta = 0.0004,initialStrategy=(1.0, 0.0))
 
         for episode in range(nb_episode):
             action1 = agent1.act(0)
-            #action2 = agent2.act(0)
-
-            """agent1.act()
-            action1 = agent1.currentAction
-            """
-            agent2.act(0)
-            action2 = agent2.currentAction
+            action2 = agent2.act(0)
 
             _, r1, r2 = game.step(action1, action2)
 
             agent1.observe(reward=r1, obs=0, nextobs=0)
-            agent2.observe(reward=r2, obs=0, nextObs=0)
+            agent2.observe(reward=r2, obs=0, nextobs=0)
 
 
             if episode % evaluate_every == 0:
                 index = int(episode / evaluate_every)
                 total_pi_historyHeads[index] += agent1.pi[0][0]
-                total_pi_historyHeads2[index] += agent2.strategy[0][0]
+                total_pi_historyHeads2[index] += agent2.pi[0][0]
 
             if episode%50000 == 0:
                 print(episode)
@@ -69,12 +63,12 @@ if __name__ == '__main__':
     print("time : " + str(t2-t1))
     total_pi_historyHeads/=nb_runs
     total_pi_historyHeads2/=nb_runs
-    plt.plot(np.arange(0,len(total_pi_historyHeads)*evaluate_every, evaluate_every),total_pi_historyHeads, label="Wolf-PHC: Pr(Heads)",  linewidth=0.5)
-    plt.plot(np.arange(0,len(total_pi_historyHeads2)*evaluate_every, evaluate_every),total_pi_historyHeads2, label="PHC: Pr(Heads)", linewidth=0.5)
+    plt.plot(np.arange(0,len(total_pi_historyHeads)*evaluate_every, evaluate_every),total_pi_historyHeads, label="WoLF-PHC: Pr(Heads)",  linewidth=0.5)
+    plt.plot(np.arange(0,len(total_pi_historyHeads2)*evaluate_every, evaluate_every),total_pi_historyHeads2, label="WoLF-PHC: Pr(Heads)", linewidth=0.5)
 
     plt.ylim(0, 1)
     plt.xlabel("Iterations")
     plt.ylabel("Pr(Heads)")
     plt.legend()
-    plt.savefig("resultMP.jpg")
+    plt.savefig("resultMPWolf2.jpg")
     plt.show()

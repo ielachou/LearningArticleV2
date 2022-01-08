@@ -73,20 +73,20 @@ class GridWorldEnv:
     def getRew(self, old, new, north):
         if old == 6 or old == 8:
             if new == 3 or new == 5 or new == 7:
-                return 0.3
+                return 0
         elif old == 3 or old == 5 or old == 7:
             if new == 6 or new == 8:
-                return -0.3
+                return 0
             elif new == 4 or new == 0 or new == 2:
-                return 0.6
+                return 0
         elif old == 4 or old == 0 or old == 2:
             if new == 1:
                 return 1
             elif new == 3 or new == 5 or new == 7:
-                return -0.8
+                return 0
 
         if old == 6 or old == 8 and north:
             if new == 6 or new == 8:
-                return 0.5
+                return 0.3
         if old == new:
-            return -1
+            return 0
